@@ -1,0 +1,61 @@
+doctype html
+html(lang="en" ng-app="IVTAdmin")
+head
+	meta(charset="UTF-8")
+	meta(name="viewport" content="width=device-width, initial-scale=1")
+
+	title Админ панель
+
+	link(rel="stylesheet", href="/stylesheets/admin.css")
+	link(rel="stylesheet", href="/vendor/bootstrap/dist/css/bootstrap.min.css")
+
+body
+
+	.nav-bar
+		ul
+			li
+				a.to-site(href="/")
+					i.glyphicon.glyphicon-log-in
+					| Режим просмотра
+			li
+				a(href="#/employees")
+					i.glyphicon.glyphicon-user
+					| Сотрудники
+			li
+				a(href="#/position")
+					i.glyphicon.glyphicon-star-empty
+					| Должности
+			li
+				a(href="#/grades")
+					i.glyphicon.glyphicon-ok-circle
+					| Звания
+			li
+				a(href="#/faculties")
+					i.glyphicon.glyphicon-education
+					| Факультеты
+			li
+				a(href="#/university")
+					i.glyphicon.glyphicon-education
+					| Вузы
+
+
+	block content
+
+	script(src="/vendor/angular/angular.min.js")
+	script(src="/vendor/angular-route/angular-route.min.js")
+	script(src="/vendor/ng-file-upload/ng-file-upload.min.js")
+	script(src="/vendor/moment.min.js")
+
+	script(src="/javascripts/adminApp/adminApp.js")
+	script(src="/javascripts/adminApp/controllers/employeesCtrl.js")
+	script(src="/javascripts/adminApp/controllers/positionCtrl.js")
+	script(src="/javascripts/adminApp/controllers/gradeCtrl.js")
+	script(src="/javascripts/adminApp/controllers/facultyCtrl.js")
+	script(src="/javascripts/adminApp/controllers/universityCtrl.js")
+	script(src="/javascripts/adminApp/services/EmployeesService.js")
+	script(src="/javascripts/adminApp/services/PositionService.js")
+	script(src="/javascripts/adminApp/services/GradeService.js")
+	script(src="/javascripts/adminApp/services/FacultyService.js")
+	script(src="/javascripts/adminApp/services/UniversityService.js")
+	script(src="/javascripts/adminApp/filters/filters.js")
+

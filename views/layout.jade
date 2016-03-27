@@ -1,0 +1,39 @@
+doctype html
+html(ng-app="IVTRegister")
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+
+		title IVT Register
+
+		link(rel="stylesheet", href="/stylesheets/style.css")
+		link(rel="stylesheet", href="/vendor/bootstrap/dist/css/bootstrap.min.css")
+
+	body
+		.nav-bar
+			.logo
+				a(href="#/")
+					h1 IVT Register
+
+			.auth-block.cf
+
+				if (user)
+					a.btn-main(href="/logout") Выход
+					if (user.admin)
+						a.btn-main(href="/admin") Админка
+
+				else
+					a.btn-main(href="/reg") Регистрация
+					a.btn-main(href="/login") Вход
+
+		block content
+
+		script(src="/vendor/angular/angular.min.js")
+		script(src="/vendor/angular-route/angular-route.min.js")
+		script(src="/vendor/moment.min.js")
+
+		script(src="/javascripts/app/app.js")
+		script(src="/javascripts/app/controllers/mainCtrl.js")
+		script(src="/javascripts/app/controllers/employeesCtrl.js")
+		script(src="/javascripts/app/services/EmployeesService.js")
+		script(src="/javascripts/app/filters/filters.js")

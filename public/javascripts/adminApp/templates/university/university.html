@@ -1,0 +1,57 @@
+
+<div class="content-wrapper">
+
+	<div class="content">
+
+		<h1>Вузы</h1>
+		<hr>
+
+		<div class="employees-block">
+
+			<div class="btn-black" ng-if="!createVis" ng-click="showCreate()">Добавить вуз</div>
+
+			<hr>
+
+			<div class="create-position" ng-if="createVis">
+
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<input type="text" ng-model="university.title" class="form-control" placeholder="Название звания">
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<input type="text" ng-model="university.country" class="form-control" placeholder="Страна">
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="btn-black" ng-click="create(university)">Создать</div>
+					</div>
+				</div>
+				<hr>
+			</div>
+
+			<div class="no-empl-note" ng-class="universities.length == 0 ? 'block-show': '' ">
+				<h3>Пока нет ни одного вуза</h3>
+			</div>
+
+			<table class="table z-depth-1" ng-if="universities.length != 0">
+				<thead>
+					<th>Название</th>
+					<th>Страна</th>
+					<th>Действия</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="university in universities | orderBy: university.title " class="empl-row">
+						<td><b ng-bind="university.title"></b></td>
+						<td><b ng-bind="university.country"></b></td>
+						<td>
+							<div class="btn-black" ng-click="delete(university, $index)"><i class="glyphicon glyphicon-trash"></i></div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

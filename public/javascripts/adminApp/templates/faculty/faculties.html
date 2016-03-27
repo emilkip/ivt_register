@@ -1,0 +1,106 @@
+
+<div class="content-wrapper">
+
+	<div class="content">
+
+		<h1>Факультеты и кафедры</h1>
+		<hr>
+
+		<div class="employees-block">
+
+			<div class="row">
+
+				<div class="col-md-6">
+					<div class="btn-black" ng-if="!createFacultyVis" ng-click="showCreate('faculty')">Добавить факультет</div>
+					<hr>
+
+					<div class="create-position" ng-if="createFacultyVis">
+
+						<div class="row">
+							<div class="col-sm-9">
+								<div class="form-group">
+									<input type="text" ng-model="faculty.title" class="form-control" placeholder="Название факультета">
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="btn-black" ng-click="createFaculty(faculty)">Создать</div>
+							</div>
+						</div>
+						<hr>
+					</div>
+
+					<div class="no-empl-note" ng-class="faculties.length == 0 ? 'block-show': '' ">
+						<h3>Пока нет ни одного факультета</h3>
+					</div>
+
+					<table class="table z-depth-1" ng-if="faculties.length != 0">
+						<thead>
+							<th>Название</th>
+							<th>Действия</th>
+						</thead>
+						<tbody>
+							<tr ng-repeat="faculty in faculties | orderBy: faculty.title " class="empl-row">
+								<td><b ng-bind="faculty.title"></b></td>
+								<td>
+									<div class="btn-black" ng-click="deleteFaculty(faculty, $index)"><i class="glyphicon glyphicon-trash"></i></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+
+				<div class="col-md-6">
+
+					<div class="btn-black" ng-if="!createSpecVis" ng-click="showCreate('spec')">Добавить кафедру</div>
+					<hr>
+
+					<div class="create-position" ng-if="createSpecVis">
+
+						<div class="row">
+							<div class="col-sm-9">
+								<div class="form-group">
+									<input type="text" ng-model="spec.title" class="form-control" placeholder="Название кафедры">
+								</div>
+								<div class="form-group">
+									<select ng-model="spec.faculty" class="form-control" placeholder="Название кафедры">
+										<option value="">Факультет</option>
+										<option ng-repeat="faculty in faculties" value="{{faculty.id}}" ng-bind="faculty.title"></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="btn-black" ng-click="createSpec(spec)">Создать</div>
+							</div>
+						</div>
+						<hr>
+					</div>
+
+					<div class="no-empl-note" ng-class="specs.length == 0 ? 'block-show': '' ">
+						<h3>Пока нет ни одной кафедры</h3>
+					</div>
+
+					<table class="table z-depth-1" ng-if="specs.length != 0">
+						<thead>
+							<th>Название</th>
+							<th>Факультет</th>
+							<th>Действия</th>
+						</thead>
+						<tbody>
+							<tr ng-repeat="spec in specs | orderBy: spec.title " class="empl-row">
+								<td><b ng-bind="spec.title"></b></td>
+								<td><b ng-bind="spec.faculty.title"></b></td>
+								<td>
+									<div class="btn-black" ng-click="deleteSpec(spec, $index)"><i class="glyphicon glyphicon-trash"></i></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>

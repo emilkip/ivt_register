@@ -1,0 +1,50 @@
+
+<div class="content-wrapper">
+
+	<div class="content">
+
+		<h1>Звания</h1>
+		<hr>
+
+		<div class="employees-block">
+
+			<div class="btn-black" ng-if="!createVis" ng-click="showCreate()">Добавить завние</div>
+
+			<hr>
+
+			<div class="create-position" ng-if="createVis">
+
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="form-group">
+							<input type="text" ng-model="grade.title" class="form-control" placeholder="Название звания">
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="btn-black" ng-click="create(grade)">Создать</div>
+					</div>
+				</div>
+				<hr>
+			</div>
+
+			<div class="no-empl-note" ng-class="grades.length == 0 ? 'block-show': '' ">
+				<h3>Пока нет ни одного звания</h3>
+			</div>
+
+			<table class="table z-depth-1" ng-if="grades.length != 0">
+				<thead>
+					<th>Название</th>
+					<th>Действия</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="grade in grades | orderBy: grade.title " class="empl-row">
+						<td><b ng-bind="grade.title"></b></td>
+						<td>
+							<div class="btn-black" ng-click="delete(grade, $index)"><i class="glyphicon glyphicon-trash"></i></div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

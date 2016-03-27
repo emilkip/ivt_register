@@ -1,0 +1,60 @@
+
+<div class="content-wrapper">
+
+	<div class="content">
+
+		<h1>Сотрудники</h1>
+		<hr>
+		<a href="#/employees/create" class="btn-black">Добавить сотрдуника</a>
+		<hr>
+
+		<div class="search-block z-depth-1">
+			<div class="row">
+				<div class="col-md-8 sb-item">
+					<h4>Поиск</h4>
+					<div class="sb-input">
+						<input type="text" placeholder="Найти" ng-model="search">
+					</div>
+				</div>
+				<div class="col-md-4 sb-item">
+					<h4>Сортировка</h4>
+					<div class="sb-sort">
+						<select ng-model="sortField">
+							<option value="lastName">Ф.И.О.</option>
+							<option value="birthday">Дата рождения</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="employees-block">
+			<div class="no-empl-note" ng-class="employees.length == 0 ? 'block-show': '' ">
+				<h3>Пока нет ни одного сотрудника</h3>
+			</div>
+
+			<table class="table z-depth-1" ng-if="employees.length != 0">
+				<thead>
+					<th>Ф.И.О.</th>
+					<th>Дата рождения</th>
+					<th>Телефон</th>
+					<th>Номер пасспорта</th>
+					<th>Инфомация</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="empl in employees | orderBy: sortField | filter: search " class="empl-row">
+						<td><b ng-bind="empl.lastName + ' ' + empl.firstName + ' ' + empl.middleName "></b></td>
+						<td><span ng-bind="empl.birthday != null ? (employees.birthday | timeFormat) : 'Не указано' "></span></td>
+						<td><span ng-bind="empl.telephone || 'Не указано' "></span></td>
+						<td><span ng-bind="empl.passportNum || 'Не указано' "></span></td>
+						<td>
+							<a href="#/employees/{{empl.id}}/edit"><div class="btn-black"><i class="glyphicon glyphicon-pencil"></i></div></a>
+							<div class="btn-black" ng-click="delete(empl, $index)"><i class="glyphicon glyphicon-trash"></i></div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>

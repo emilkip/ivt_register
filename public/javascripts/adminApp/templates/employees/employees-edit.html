@@ -1,0 +1,303 @@
+
+<div class="content-wrapper">
+
+	<div class="content">
+
+		<h1>Редактирование сотрудника</h1>
+		<p><b>Сотрудник: </b><span ng-bind="employees.lastName + ' ' + employees.firstName + ' ' + employees.middleName "></span></p>
+		<hr>
+
+		<div class="block cf" ng-class="invalidGroup1 ? 'required-field' : '' ">
+			<h4>Главная информация</h4>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Имя" ng-model="employees.firstName">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Фамилия" ng-model="employees.lastName">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Отчество" ng-model="employees.middleName">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="block">
+			<h3>Должности</h3>
+			<hr>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<select ng-model="position.position" ng-options="position as position.title for position in positions track by position.id">
+							<option value="">Выберете должность</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<select ng-model="position.faculty" ng-options="faculty as faculty.title for faculty in faculties track by faculty.id" ng-change="selectFaculty(position.faculty.id)">
+							<option value="">Выберете факультет</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<select ng-model="position.specialization" ng-options="spec as spec.title for spec in specs track by spec.id">
+							<option value="">Выберете кафедру</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<input id="mn" type="number" class="form-control" placeholder="Начало сотрудничества (год)" ng-model="position.yearOfBegin">
+					</div>
+					<div class="form-group">
+						<input id="mn" type="number" class="form-control" placeholder="Окончание сотрудничества(год)" ng-model="position.yearOfEnd">
+					</div>
+					<div class="form-group">
+						<input id="mn" type="number" class="form-control" placeholder="Номер документа" ng-model="position.documentNum">
+					</div>
+					<div class="form-group">
+						<div class="btn-black" ng-click="addPosition(position)">Добавить</div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<table class="table">
+						<thead>
+							<th>Должность</th>
+							<th>Кафедра</th>
+							<th>Номер документа</th>
+							<th>Дата начала</th>
+							<th>Дата окончания</th>
+							<th></th>
+						</thead>
+						<tbody>
+							<tr ng-repeat="position in employees.positions">
+								<td><span ng-bind="position.position.title"></span></td>
+								<td><span ng-bind="position.specialization.title"></span></td>
+								<td><span ng-bind="position.documentNum"></span></td>
+								<td><span ng-bind="position.yearOfBegin"></span></td>
+								<td><span ng-bind="position.yearOfEnd"></span></td>
+								<td><div class="btn-black" ng-click="removePosition($index)"><i class="glyphicon glyphicon-trash"></i></div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="block">
+			<h3>Звания</h3>
+			<hr>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<select ng-model="grade.grade" name="" id="position" ng-options="grade as grade.title for grade in grades track by grade.id">
+							<option value="">Выберете звание</option>
+						</select>
+					</div>
+					<div class="form-group">
+							<input type="number" class="form-control" placeholder="Номер документа" ng-model="grade.documentNum">
+					</div>
+					<div class="form-group">
+							<input type="number" class="form-control" placeholder="Год получения" ng-model="grade.year">
+					</div>
+					<div class="form-group">
+						<div class="btn-black" ng-click="addGrade(grade)">Добавить</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<table class="table">
+						<thead>
+							<th>Звание</th>
+							<th>Год получения</th>
+							<th>Номер документа</th>
+							<th></th>
+						</thead>
+						<tbody>
+							<tr ng-repeat="grade in employees.grades">
+								<td><span ng-bind="grade.grade.title"></span></td>
+								<td><span ng-bind="grade.year"></span></td>
+								<td><span ng-bind="grade.documentNum"></span></td>
+								<td><div class="btn-black" ng-click="removeGrade($index)"><i class="glyphicon glyphicon-trash"></i></div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="block">
+			<h4>Дополнительная информация</h4>
+			<div class="row">
+				<div class="col-md-4">
+					<p>Дата рождения</p>
+					<div class="row">
+						<div class="col-sm-4">
+							<input id="mn" type="number" class="form-control" placeholder="День" ng-model="employees.birthday.day">
+						</div>
+						<div class="col-sm-4">
+							<input id="mn" type="number" class="form-control" placeholder="Месяц" ng-model="employees.birthday.month">
+						</div>
+						<div class="col-sm-4">
+							<input id="mn" type="number" class="form-control" placeholder="Год" ng-model="employees.birthday.year">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<p>Телефон</p>
+					<div class="form-group">
+						<input id="mn" type="text" class="form-control" placeholder="Телефон" ng-model="employees.telephone">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<p>Номер паспорта</p>
+					<div class="form-group">
+						<input id="mn" type="number" class="form-control" placeholder="Номер паспорта" ng-model="employees.passportNum">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="block">
+			<h3>Адрес</h3>
+			<hr>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<input id="mn" type="text" class="form-control" placeholder="Адресные проживания" ng-model="employees.address">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="block">
+			<h3>Образование</h3>
+			<hr>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group">
+						<select ng-model="education.university" ng-options="university as university.title for university in universities track by university.id">
+							<option value="">Выберете университет</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Специальность" ng-model="education.spec">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<input id="mn" type="number" class="form-control" placeholder="Начало обучения (год)" ng-model="education.yearOfBegin">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<input id="mn" type="number" class="form-control" placeholder="Окончание обучения (год)" ng-model="education.yearOfEnd">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<input id="mn" type="number" class="form-control" placeholder="Номер документа" ng-model="education.documentNum">
+					</div>
+				</div>
+			</div>
+			<div class="btn-black" ng-click="addEducation(education)">Добавить</div>
+			<hr>
+			<table class="table">
+				<thead>
+					<th>Вуз</th>
+					<th>Специальность</th>
+					<th>Дата начала</th>
+					<th>Дата окончания</th>
+					<th>Номер документа</th>
+					<th></th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="education in employees.educations">
+						<td><span ng-bind="education.university.title"></span></td>
+						<td><span ng-bind="education.spec"></span></td>
+						<td><span ng-bind="education.yearOfBegin"></span></td>
+						<td><span ng-bind="education.yearOfEnd"></span></td>
+						<td><span ng-bind="education.documentNum"></span></td>
+						<td><div class="btn-black" ng-click="removeEducation($index)"><i class="glyphicon glyphicon-trash"></i></div></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="block">
+			<div class="row">
+				<div class="col-md-6">
+					<h3>Фотография</h3>
+					<hr>
+					<div class="cpf-thumb" name="avatar" ngf-drop ngf-select ng-model="avatar" ngf-multiple="false" ngf-pattern="'image/*'" accept="image/*" ngf-allow-dir="true" ngf-drag-over-class="thumbnail-dragover"s>
+					<img src="" ng-if="avatar" ngf-src="avatar">
+					<i class="glyphicon glyphicon-picture" ng-if="!avatar"></i>
+					<span ng-if="!avatar">Перенесите сюда своё изображение или выберете его</span>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<h3>Дети сотрудника (опционально)</h3>
+					<hr>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<input id="mn" type="text" class="form-control" placeholder="Имя" ng-model="child.firstName">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<input id="mn" type="text" class="form-control" placeholder="Фамилия" ng-model="child.lastName">
+							</div>
+						</div>
+					</div>
+					<p>Дата рождения</p>
+					<div class="row">
+						<div class="col-xs-4">
+							<div class="form-group">
+								<input id="mn" type="number" class="form-control" placeholder="День" ng-model="child.birthday.day">
+							</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="form-group">
+								<input id="mn" type="number" class="form-control" placeholder="Месяц" ng-model="child.birthday.month">
+							</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="form-group">
+								<input id="mn" type="number" class="form-control" placeholder="Год" ng-model="child.birthday.year">
+							</div>
+						</div>
+					</div>
+					<div class="btn-black" ng-click="addChild(child)">Добавить</div>
+					<hr>
+					<table class="table">
+						<thead>
+							<th>Имя</th>
+							<th>Фамилия</th>
+							<th>Дата рождения</th>
+							<th></th>
+						</thead>
+						<tbody>
+							<tr ng-repeat="child in employees.childs">
+								<td ng-bind="child.firstName"></td>
+								<td ng-bind="child.lastName"></td>
+								<td ng-bind="child.birthday"></td>
+								<td><div class="btn-black" ng-click="removeChild($index)"><i class="glyphicon glyphicon-trash"></i></div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="error-note" ng-class="invalidGroup1 ? 'block-show' : '' ">Заполните все обязательные поля</div>
+		<div class="btn-black" ng-click="save(employees)"><i class="glyphicon glyphicon-floppy-disk"></i>Сохранить</div>
+
+	</div>
+</div>

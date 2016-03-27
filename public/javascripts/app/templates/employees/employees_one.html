@@ -1,0 +1,128 @@
+
+<div class="container">
+
+	<div class="content">
+		<div class="row">
+			<div class="empl-block cf z-depth-1">
+				<div class="col-md-3">
+					<div class="empl-photo">
+						<img src="/images/photos/{{employees.photo}}" alt="">
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="empl-info">
+
+						<h2 ng-bind="employees.lastName + ' ' + employees.firstName + ' ' + employees.middleName "></h2>
+						<hr>
+						<table class="table-hover">
+							<tr>
+								<td><b>Дата рождения: </b></td>
+								<td ng-bind="employees.birthday != null ? (employees.birthday | timeFormat) : 'Не указано' "></td>
+							</tr>
+							<tr>
+								<td><b>Телефон: </b></td>
+								<td ng-bind="employees.telephone || 'Не указано' "></td>
+							</tr>
+							<tr>
+								<td><b>Адрес: </b></td>
+								<td ng-bind="employees.address || 'Не указано' "></td>
+							</tr>
+							<tr>
+								<td><b>Номер пасспорта: </b></td>
+								<td ng-bind="employees.passportNum || 'Не указано' "></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="child-block z-depth-1">
+				<h3>Должности:</h3>
+				<table class="table">
+					<thead>
+						<th>Должность</th>
+						<th>Факультет</th>
+						<th>Кафедра</th>
+						<th>Начало сотрудничества</th>
+						<th>Окончание сотрудничества</th>
+						<th>Номер документа</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="position in positions">
+							<td><span ng-bind="position.position.title"></span></td>
+							<td><span ng-bind="position.faculty.title == null ? 'Не указано' : position.faculty.title "></span></td>
+							<td><span ng-bind="position.specialization.title == null ? 'Не указано' : position.specialization.title "></span></td>
+							<td><span ng-bind="position.yearOfBegin == null ? 'Не указано' : position.yearOfBegin "></span></td>
+							<td><span ng-bind="position.yearOfEnd == null ? 'Не указано' : position.yearOfEnd "></span></td>
+							<td><span ng-bind="position.documentNum == null ? 'Не указано' : position.documentNum "></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="child-block z-depth-1">
+				<h3>Звания:</h3>
+				<table class="table">
+					<thead>
+						<th>Звание</th>
+						<th>Дата получения</th>
+						<th>Номер документа</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="grade in grades">
+							<td><span ng-bind="grade.grade.title"></span></td>
+							<td><span ng-bind="grade.year == null ? 'Не указано' : grade.year "></span></td>
+							<td><span ng-bind="grade.documentNum == null ? 'Не указано' : grade.documentNum "></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="child-block z-depth-1">
+				<h3>Образования:</h3>
+				<table class="table">
+					<thead>
+						<th>Вуз</th>
+						<th>специальность</th>
+						<th>Дата начала</th>
+						<th>Дата окончания</th>
+						<th>Номер документа</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="education in educations">
+							<td><span ng-bind="education.university.title"></span></td>
+							<td><span ng-bind="education.spec"></span></td>
+							<td><span ng-bind="education.yearOfBegin"></span></td>
+							<td><span ng-bind="education.yearOfEnd"></span></td>
+							<td><span ng-bind="education.documentNum"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="child-block z-depth-1">
+				<h3>Дети сотрудника:</h3>
+				<table class="table">
+					<thead>
+						<th>Фамилия, имя</th>
+						<th>Дата рождения</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="child in childs">
+							<td><b ng-bind="child.lastName + ' ' + child.firstName"></b></td>
+							<td><span ng-bind="child.birthday | timeFormat "></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
